@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Lab3.Logger;
 
 namespace Lab3
 {
@@ -56,6 +57,8 @@ namespace Lab3
                 var index = el == 0 ? data.Count - 1 : matrixClone.Select(x => x[el]).IndexOf(1);
                 data[el] = matrixClone[index];
                 matrixClone[index] = Enumerable.Repeat(0.0, matrixClone[0].Count).ToList();
+
+                LoggerProvider.Logger.Log(nameof(data), data, LogLevel.Data);
             }
 
             for (int i = 0; i < data.Count; i++)
@@ -70,9 +73,11 @@ namespace Lab3
                 for (int j = i - 1; j >= 0; j--)
                 {
                     data[j] = data[j].Zip(data[i], (curr, prev) => curr - prev * data[j][i]).ToList();
+                    LoggerProvider.Logger.Log(nameof(data), data, LogLevel.Data);
                 }
             }
 
+            LoggerProvider.Logger.Log("Result: ", matrix, LogLevel.Data);
             return data;
         }
 

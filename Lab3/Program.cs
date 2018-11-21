@@ -9,7 +9,7 @@ namespace Lab3
     {
         static void Main(string[] args)
         {
-            LoggerProvider.Logger.Value = new FileLogger("temp.txt", LogLevel.All);
+            LoggerProvider.SetLogger(new FileLogger("temp.txt", LogLevel.Data));
             
             Fraction[][] A = 
             {
@@ -19,14 +19,14 @@ namespace Lab3
             };
 
             double[] ToDouble(Fraction[] fr) => fr.Select(e => (double) e).ToArray();
-
-            LoggerProvider.Logger.Value.Log(nameof(A), A.Select(ToDouble).ToArray(), LogLevel.All);
+            LoggerProvider.Logger.Log("Logger test", LogLevel.Data);
+            LoggerProvider.Logger.Log(nameof(A), A.Select(ToDouble).ToArray(), LogLevel.Data);
 
 
             Fraction[] b = { 1, 3, 4 };
             Fraction[] c = { 1, -3, 2, 1, 4 };
-            LoggerProvider.Logger.Value.Log(nameof(b), ToDouble(b), LogLevel.All);
-            LoggerProvider.Logger.Value.Log(nameof(c), ToDouble(c), LogLevel.All);
+            LoggerProvider.Logger.Log(nameof(b), ToDouble(b), LogLevel.Data);
+            LoggerProvider.Logger.Log(nameof(c), ToDouble(c), LogLevel.Data);
 
             //Simplex simplexMatrix = new Simplex(A, b, c);
             //Console.WriteLine(string.Join(" ",  simplexMatrix.Plan));
@@ -39,12 +39,14 @@ namespace Lab3
                 new double[] { 4, 2, 6, 8 },
                 new double[] { 3, 8, 1, 2 }
             };
-            LoggerProvider.Logger.Value.Log(nameof(tariffs), tariffs, LogLevel.All);
+            LoggerProvider.Logger.Log(nameof(tariffs), tariffs, LogLevel.Data);
 
             TransportationMatrix transportation = new TransportationMatrix(producers, consumers, tariffs);
             transportation.Plan.Dump<double>();
 
-            LoggerProvider.Logger.Value.Save();
+            LoggerProvider.Logger.Log("Logger test end", LogLevel.Data);
+
+            LoggerProvider.Logger.Save();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Lab3.Logger
     {
         None = 0,
         Result = 1,
-        Warning = 3,
-        All = 7
+        Data = 2,
+        All = Result | Data
     }
 }
