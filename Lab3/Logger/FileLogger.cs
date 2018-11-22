@@ -37,7 +37,7 @@ namespace Lab3.Logger
             WriteToFile($"{prefix}{message}", level);
         }
 
-        public void Log(string title, double[] message, LogLevel level,
+        public void Log<T>(string title, T[] message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0)
@@ -46,7 +46,7 @@ namespace Lab3.Logger
             WriteToFile($"{prefix}[{ArrayToString(message)}]", level);
         }
 
-        public void Log(string title, double[][] message, LogLevel level,
+        public void Log<T>(string title, T[][] message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0)
@@ -56,7 +56,7 @@ namespace Lab3.Logger
             WriteToFile($"{prefix}[{arrayForLog}]", level);
         }
 
-        public void Log(string title, List<List<double>> message, LogLevel level,
+        public void Log<T>(string title, List<List<T>> message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0)
@@ -74,11 +74,8 @@ namespace Lab3.Logger
 
         private void WriteToFile(string text, LogLevel level)
         {
-            if (level == LogLevel.All)
-                throw new ArgumentException(nameof(level));
-
             //TODO: check log level
-            if ((_logLevel & level) != LogLevel.None)
+            if (_logLevel >= level)
             {
                 _stream.WriteLine($"{text}");
             }
@@ -103,7 +100,7 @@ namespace Lab3.Logger
 
         private string ArrayToString<T>(IEnumerable<T> array)
         {
-            return string.Join(',', array);
+            return string.Join(", ", array);
         }
     }
 }

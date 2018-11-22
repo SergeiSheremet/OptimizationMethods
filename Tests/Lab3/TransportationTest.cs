@@ -11,7 +11,7 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var1()
         {
-            LoggerProvider.SetLogger(new FileLogger("trans_test_1.txt", LogLevel.All));
+            LoggerProvider.SetLogger(new FileLogger("trans_test_1.txt", LogLevel.Data));
             double[] producers = { 50, 30, 10 };
             double[] consumers = { 30, 30, 10, 20 };
             double[][] tariffs =
@@ -38,7 +38,7 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var2()
         {
-            LoggerProvider.SetLogger(new FileLogger("trans_test_2.txt", LogLevel.All));
+            LoggerProvider.SetLogger(new FileLogger("trans_test_2.txt", LogLevel.Data));
             double[] producers = { 120, 280, 160 };
             double[] consumers = { 130, 220, 60, 70 };
             double[][] tariffs =
@@ -65,7 +65,7 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var3()
         {
-            LoggerProvider.SetLogger(new FileLogger("trans_test_3.txt", LogLevel.All));
+            LoggerProvider.SetLogger(new FileLogger("trans_test_3.txt", LogLevel.Data));
             double[] producers = { 90, 30, 40};
             double[] consumers = { 70, 30, 20, 40 };
             double[][] tariffs =

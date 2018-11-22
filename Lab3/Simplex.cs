@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using Lab3.Logger;
 
 namespace Lab3
 {
@@ -31,28 +32,20 @@ namespace Lab3
                         .Prepend(c.Concat(Enumerable.Repeat(new Fraction(0), b.Count() + 1))
                                     .ToArray())
                         .ToArray();
+            LoggerProvider.Logger.Log(nameof(_matrix), _matrix, LogLevel.Data);
 
-            //TODO: Add logger
-            _matrix.Dump();
-            Console.WriteLine();
             _matrix = _matrix.Prepend(Enumerable.Repeat(new Fraction(0), c.Count())
                                                 .Concat(Enumerable.Repeat(new Fraction(1), b.Count()))
                                                 .Append(0)
                                                 .ToArray())
                                 .ToArray();
-#if DEBUG
-            //TODO: Add logger
-            _matrix.Dump();
-            Console.WriteLine();
-#endif
+            LoggerProvider.Logger.Log(nameof(_matrix), _matrix, LogLevel.Data);
+
             for (int i = 2; i < _matrix.Length; i++)
             {
                 _matrix[0] = _matrix[0].Zip(_matrix[i], (x, y) => x - y).ToArray();
             }
-
-            //TODO: Add logger
-            _matrix.Dump();
-            Console.WriteLine();
+            LoggerProvider.Logger.Log(nameof(_matrix), _matrix, LogLevel.Data);
 
             _basis = Enumerable.Range(c.Count() + 1, b.Count())
                                 .ToArray();
@@ -71,10 +64,11 @@ namespace Lab3
                                             .Append(x.Last())
                                             .ToArray())
                             .ToArray();
-            _matrix.Dump();
+            LoggerProvider.Logger.Log(nameof(_matrix), _matrix, LogLevel.Data);
 
             //TODO: wtf?
             Solve(1);
+            LoggerProvider.Logger.Log(nameof(_matrix), _matrix, LogLevel.Data);
         }
 
         //TODO: le костыль
@@ -107,11 +101,8 @@ namespace Lab3
                                                      .ToArray())
                              .ToArray();
 
-                //TODO: Add logger
-                _matrix.Dump();
-                Console.WriteLine();
-                Console.WriteLine(string.Join(", ", Plan));
-                Console.WriteLine();
+                LoggerProvider.Logger.Log(nameof(_matrix), _matrix, LogLevel.Data);
+                LoggerProvider.Logger.Log(nameof(Plan), Plan, LogLevel.Data);
             }
         }
     }

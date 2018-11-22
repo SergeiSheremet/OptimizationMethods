@@ -1,4 +1,7 @@
-﻿namespace Lab3
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Lab3
 {
     internal static class Tools
     {
@@ -12,6 +15,16 @@
             }
 
             return array;
+        }
+
+        public static T[][] ArrayCast<T>(List<List<T>> list)
+        {
+            return list.Select(el => el.ToArray()).ToArray();
+        }
+
+        public static T[][] ArrayCast<T>(IEnumerable<IEnumerable<T>> list)
+        {
+            return list.Select(el => el.ToArray()).ToArray();
         }
     }
 }

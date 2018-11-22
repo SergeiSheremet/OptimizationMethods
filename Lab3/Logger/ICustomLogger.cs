@@ -15,17 +15,17 @@ namespace Lab3.Logger
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0);
 
-        void Log(string title, double[] message, LogLevel level,
+        void Log<T>(string title, T[] message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0);
 
-        void Log(string title, double[][] message, LogLevel level,
+        void Log<T>(string title, T[][] message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0);
 
-        void Log(string title, List<List<double>> message, LogLevel level,
+        void Log<T>(string title, List<List<T>> message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0);

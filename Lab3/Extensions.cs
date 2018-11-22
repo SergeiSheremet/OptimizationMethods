@@ -51,14 +51,13 @@ namespace Lab3
                                     .Select(x => x.Index);
 
             List<List<double>> data = matrix.CloneList();
+            LoggerProvider.Logger.Log(nameof(data), data, LogLevel.Data);
 
             foreach (var el in order)
             {
                 var index = el == 0 ? data.Count - 1 : matrixClone.Select(x => x[el]).IndexOf(1);
                 data[el] = matrixClone[index];
                 matrixClone[index] = Enumerable.Repeat(0.0, matrixClone[0].Count).ToList();
-
-                LoggerProvider.Logger.Log(nameof(data), data, LogLevel.Data);
             }
 
             for (int i = 0; i < data.Count; i++)
@@ -77,7 +76,8 @@ namespace Lab3
                 }
             }
 
-            LoggerProvider.Logger.Log("Result: ", matrix, LogLevel.Data);
+            LoggerProvider.Logger.Log(nameof(data), data, LogLevel.Data);
+
             return data;
         }
 
