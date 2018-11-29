@@ -9,14 +9,12 @@ namespace Lab3.Logger
 {
     public class FileLogger : ICustomLogger
     {
-        private readonly StreamWriter _stream;
         private readonly LogLevel _logLevel;
+        private readonly string _fileName;
         public FileLogger(string fileName, LogLevel logLevel)
         {
+            _fileName = fileName;
             _logLevel = logLevel;
-            if (File.Exists(fileName))
-                File.Delete(fileName);
-            _stream = new StreamWriter(File.OpenWrite(fileName)) {AutoFlush = true};
         }
 
         public void Log(string message, LogLevel level,
@@ -37,7 +35,7 @@ namespace Lab3.Logger
             WriteToFile($"{prefix}{message}", level);
         }
 
-        public void Log<T>(string title, T[] message, LogLevel level,
+        public void Log<T>(string title, IEnumerable<T> message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0)
@@ -46,7 +44,7 @@ namespace Lab3.Logger
             WriteToFile($"{prefix}[{ArrayToString(message)}]", level);
         }
 
-        public void Log<T>(string title, T[][] message, LogLevel level,
+        public void Log<T>(string title, IEnumerable<T[]> message, LogLevel level,
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0)
@@ -67,17 +65,14 @@ namespace Lab3.Logger
             WriteToFile($"{prefix}[{arrayForLog}]", level);
         }
 
-        public void Save()
-        {
-            _stream.Close();
-        }
-
         private void WriteToFile(string text, LogLevel level)
         {
-            //TODO: check log level
-            if (_logLevel >= level)
+            using (StreamWriter stream = File.AppendText(_fileName))
             {
-                _stream.WriteLine($"{text}");
+                if (_logLevel >= level)
+                {
+                    stream.WriteLine($"{text}");
+                }
             }
         }
 

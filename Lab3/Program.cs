@@ -35,10 +35,8 @@ namespace Lab3
                 new double[] { 3, 8, 1, 2 }
             };
 
-            TransportationMatrix transportation = new TransportationMatrix(producers, consumers, tariffs);
-            transportation.Plan.Dump<double>();
-
-            LoggerProvider.Logger.Save();
+            var transportation = new TransportationMatrix(producers, consumers, tariffs);
+            LoggerProvider.Logger.Log(nameof(transportation), transportation.Plan, LogLevel.Data);
         }
     }
 }

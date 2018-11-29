@@ -92,6 +92,7 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var4()
         {
+            LoggerProvider.SetLogger(new FileLogger("trans_test_4.txt", LogLevel.Data));
             double[] producers = { 40, 30, 30 };
             double[] consumers = { 30, 70 };
             double[][] tariffs =
@@ -109,11 +110,15 @@ namespace Tests.Lab3
                 new double[] { 30, 0 }
             };
             bool isSame = transportation.Plan.Compare(answers);
+            LoggerProvider.Logger.Log(nameof(isSame), isSame.ToString(), LogLevel.Result);
+            LoggerProvider.Logger.Log(nameof(transportation.Plan), transportation.Plan.ToArray(), LogLevel.Result);
+
             Assert.IsTrue(isSame);
         }
         [TestMethod]
         public void Var5()
         {
+            LoggerProvider.SetLogger(new FileLogger("trans_test_5.txt", LogLevel.Data));
             double[] producers = { 90, 30, 40 };
             double[] consumers = { 50, 60, 10 };
             double[][] tariffs =
@@ -131,6 +136,9 @@ namespace Tests.Lab3
                 new double[] { 0, 20, 10, 10 }
             };
             bool isSame = transportation.Plan.Compare(answers);
+            LoggerProvider.Logger.Log(nameof(isSame), isSame.ToString(), LogLevel.Result);
+            LoggerProvider.Logger.Log(nameof(transportation.Plan), transportation.Plan.ToArray(), LogLevel.Result);
+
             Assert.IsTrue(isSame);
         }
     }

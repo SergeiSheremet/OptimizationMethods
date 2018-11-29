@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Lab3;
+using Lab3.Logger;
 
 namespace Tests.Lab3
 {
@@ -10,6 +11,7 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var1()
         {
+            LoggerProvider.SetLogger(new FileLogger("simplex_test_1.txt", LogLevel.Data));
             Fraction[][] A = 
             {
                 new Fraction[] { 1, 2, -1, 2, 4 },
@@ -28,7 +30,8 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var2()
         {
-            Fraction[][] A = 
+            LoggerProvider.SetLogger(new FileLogger("simplex_test_2.txt", LogLevel.Data));
+            Fraction[][] A =
             {
                 new Fraction[] { -1, 3, 0, 2, 1 },
                 new Fraction[] { 2, -1, 1, 2, 3 },
@@ -46,7 +49,8 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var3()
         {
-            Fraction[][] A = 
+            LoggerProvider.SetLogger(new FileLogger("simplex_test_3.txt", LogLevel.Data));
+            Fraction[][] A =
             {
                 new Fraction[] { -1, 3, 0, 2, 1 },
                 new Fraction[] { 2, -1, 1, 2, 3 },
@@ -64,7 +68,8 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var4()
         {
-            Fraction[][] A = 
+            LoggerProvider.SetLogger(new FileLogger("simplex_test_4.txt", LogLevel.Data));
+            Fraction[][] A =
             {
                 new Fraction[] { 2, 3, 1, 2, 1 },
                 new Fraction[] { 2, 1, -3, 2, 1 },
@@ -87,7 +92,8 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var5()
         {
-            Fraction[][] A = 
+            LoggerProvider.SetLogger(new FileLogger("simplex_test_5.txt", LogLevel.Data));
+            Fraction[][] A =
             {
                 new Fraction[] { 2, 1, 3, 4 },
                 new Fraction[] { 1, -1, 2, 1 },
@@ -111,7 +117,8 @@ namespace Tests.Lab3
         [TestMethod]
         public void Var9()
         {
-            Fraction[][] A = 
+            LoggerProvider.SetLogger(new FileLogger("simplex_test_9.txt", LogLevel.Data));
+            Fraction[][] A =
             {
                 new Fraction[] { 1, 2, 3, 1, 2, 5 },
                 new Fraction[] { 2, -3, 1, 2, 1, 4 },

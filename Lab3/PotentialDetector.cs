@@ -1,4 +1,5 @@
 using System;
+using Lab3.Logger;
 
 namespace Lab3
 {
@@ -22,8 +23,8 @@ namespace Lab3
                     SetColumn(group, j);
                 }
 
-            _plan.Dump<double>();
-            _coeffs.Dump<(int, int)>();
+            LoggerProvider.Logger.Log(nameof(_plan), _plan, LogLevel.Data);
+            LoggerProvider.Logger.Log(nameof(_coeffs), _coeffs, LogLevel.Data);
 
             var cells = new (int, int)[group - 1];
 
@@ -43,8 +44,7 @@ namespace Lab3
                     cells[_coeffs[i][j].Item1 - 2] = (i, j);
                 }
             }
-            cells.Dump();
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~");
+            LoggerProvider.Logger.Log(nameof(cells), cells, LogLevel.Data);
             return cells;
         }
 

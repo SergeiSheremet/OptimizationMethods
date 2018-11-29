@@ -72,23 +72,12 @@ namespace Lab3
                 for (int j = i - 1; j >= 0; j--)
                 {
                     data[j] = data[j].Zip(data[i], (curr, prev) => curr - prev * data[j][i]).ToList();
-                    LoggerProvider.Logger.Log(nameof(data), data, LogLevel.Data);
                 }
             }
 
             LoggerProvider.Logger.Log(nameof(data), data, LogLevel.Data);
 
             return data;
-        }
-
-        public static void Dump<T>(this IEnumerable<IEnumerable<T>> matrix)
-        {
-            Console.WriteLine(string.Join("\n", matrix.Select(x => string.Join("\t", x))));
-        }
-
-        public static void Dump<T>(this IEnumerable<T> matrix)
-        {
-            Console.WriteLine(string.Join("\t", matrix));
         }
 
         public static double[][] CloneArray(this double[][] source)
