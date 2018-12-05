@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Lab3.Logger
         {
             _fileName = fileName;
             _logLevel = logLevel;
+            File.Delete(_fileName);
         }
 
         public void Log(string message, LogLevel level,
@@ -41,27 +43,27 @@ namespace Lab3.Logger
             [CallerLineNumber]int line = 0)
         {
             string prefix = GetPrefix(path, method, line) + $"{title}: ";
-            WriteToFile($"{prefix}[{ArrayToString(message)}]", level);
-        }
+            string arrayForLog;
 
-        public void Log<T>(string title, IEnumerable<T[]> message, LogLevel level,
-            [CallerFilePath]string path = "",
-            [CallerMemberName]string method = "",
-            [CallerLineNumber]int line = 0)
-        {
-            string prefix = GetPrefix(path, method, line) + $"{title}: ";
-            string arrayForLog = string.Join($"\n{AddTab(prefix.Length)}", message.Select(ArrayToString));
-            WriteToFile($"{prefix}[{arrayForLog}]", level);
-        }
+            if (message.First() is IEnumerable)
+            {
+                List<string> dataList = new List<string>();
+                foreach (var e in message)
+                {
+                    List<string> subRes = new List<string>();
+                    foreach (var subElement in (e as IEnumerable))
+                    {
+                        subRes.Add(subElement.ToString());
+                    }
+                    dataList.Add(ArrayToString(subRes));
+                }
+                arrayForLog = string.Join($"\n{AddTab(prefix.Length)}", dataList);
+            }
+            else
+            {
+                arrayForLog = ArrayToString(message);
+            }
 
-        public void Log<T>(string title, List<List<T>> message, LogLevel level,
-            [CallerFilePath]string path = "",
-            [CallerMemberName]string method = "",
-            [CallerLineNumber]int line = 0)
-        {
-            Log(title, message.Select(f => f.Select(s => s).ToArray()).ToArray(), level, path, method, line);
-            string prefix = GetPrefix(path, method, line) + $"{title}: ";
-            string arrayForLog = string.Join($"\n{AddTab(prefix.Length)}", message.Select(ArrayToString));
             WriteToFile($"{prefix}[{arrayForLog}]", level);
         }
 

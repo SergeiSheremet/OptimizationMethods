@@ -19,15 +19,5 @@ namespace Lab3.Logger
             [CallerFilePath]string path = "",
             [CallerMemberName]string method = "",
             [CallerLineNumber]int line = 0);
-
-        void Log<T>(string title, IEnumerable<T[]> message, LogLevel level,
-            [CallerFilePath]string path = "",
-            [CallerMemberName]string method = "",
-            [CallerLineNumber]int line = 0);
-
-        void Log<T>(string title, List<List<T>> message, LogLevel level,
-            [CallerFilePath]string path = "",
-            [CallerMemberName]string method = "",
-            [CallerLineNumber]int line = 0);
     }
 }
