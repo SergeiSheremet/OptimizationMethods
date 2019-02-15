@@ -113,7 +113,7 @@ namespace Lab3
             PrefillCargoes();
             SetBasis();
             SetPotentials();
-
+            LoggerProvider.Logger.Log("potentials", _tariffs.Select((x, i) => x.Append(_producerPotentials[i])).Append(_consumerPotentials),LogLevel.Data);
             bool isCompleted = CheckIfFinish();
 
             while (!isCompleted)

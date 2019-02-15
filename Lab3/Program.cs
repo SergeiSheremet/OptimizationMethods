@@ -10,29 +10,26 @@ namespace Lab3
         static void Main(string[] args)
         {
             LoggerProvider.SetLogger(new FileLogger("temp.txt", LogLevel.Data));
-            
-            Fraction[][] A = 
+
+            Fraction[][] A =
             {
                 new Fraction[] { 1, 2, -1, 2, 4 },
                 new Fraction[] { 0, -1, 2, 1, 3 },
-                new Fraction[] { 1, -3, 2, 2, 0 }
+                new Fraction[] { 1, -3, 2, 2, 0 },
             };
-
-            double[] ToDouble(Fraction[] fr) => fr.Select(e => (double) e).ToArray();
-
             Fraction[] b = { 1, 3, 4 };
-            Fraction[] c = { 1, -3, 2, 1, 4 };
+            Fraction[] c = { 1, 3, 2, 1, 4 };
 
             Simplex simplexMatrix = new Simplex(A, b, c);
-            Console.WriteLine(string.Join(" ", simplexMatrix.Plan));
+            LoggerProvider.Logger.Log(nameof(simplexMatrix), simplexMatrix.Plan, LogLevel.Data);
 
-            double[] producers = { 120, 280, 160 };
-            double[] consumers = { 130, 220, 60, 70 };
+            double[] producers = { 50, 30, 10 };
+            double[] consumers = { 30, 30, 10, 20 };
             double[][] tariffs =
             {
-                new double[] { 1, 7, 9, 5 },
-                new double[] { 4, 2, 6, 8 },
-                new double[] { 3, 8, 1, 2 }
+                new double[] { 1, 2, 4, 1 },
+                new double[] { 2, 3, 1, 5 },
+                new double[] { 3, 2, 4, 4 }
             };
 
             var transportation = new TransportationMatrix(producers, consumers, tariffs);

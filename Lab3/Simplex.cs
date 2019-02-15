@@ -85,10 +85,6 @@ namespace Lab3
 
                 int fromBasis = ratios.IndexOf(ratios.Min()) + numberOfFunctions;
                 Fraction solver = _matrix[fromBasis][toBasis];
-
-                //Console.WriteLine(fromBasis + " " + toBasis);
-                //Console.WriteLine(solver);
-                //Console.WriteLine();
                 
                 _matrix[fromBasis] = _matrix[fromBasis].Select(x => x / solver)
                                                         .ToArray();
@@ -99,7 +95,7 @@ namespace Lab3
                                                 ? row
                                                 : row.Zip(_matrix[fromBasis], (x, y) => x - y * _matrix[i][toBasis] / _matrix[fromBasis][toBasis])
                                                      .ToArray())
-                             .ToArray();
+                                  .ToArray();
 
                 LoggerProvider.Logger.Log(nameof(_matrix), _matrix, LogLevel.Data);
                 LoggerProvider.Logger.Log(nameof(Plan), Plan, LogLevel.Data);

@@ -9,7 +9,7 @@ namespace Lab3
 
         public Fraction(int numerator, int denominator = 1)
         {
-            if (denominator == 0)
+            if (denominator < 1)
             {
                 throw new ArgumentException();
             }
@@ -56,7 +56,7 @@ namespace Lab3
 
         public static Fraction operator -(Fraction fraction)
         {
-            return new Fraction(-fraction.Numerator, fraction.Denominator);
+            return new Fraction(-fraction.Numerator, fraction.Denominator).Reduce();
         }
 
         public static Fraction operator +(Fraction left, Fraction right)

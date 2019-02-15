@@ -57,7 +57,7 @@ namespace Lab3.Logger
                     }
                     dataList.Add(ArrayToString(subRes));
                 }
-                arrayForLog = string.Join($"\n{AddTab(prefix.Length)}", dataList);
+                arrayForLog = $"\r\n{AddTab(prefix.Length)}" + string.Join($"\r\n{AddTab(prefix.Length)}", dataList);
             }
             else
             {
@@ -81,7 +81,7 @@ namespace Lab3.Logger
         private string GetPrefix(string path, string method, int line)
         {
             string className = path.Split("\\").Last().Split("/").Last();
-            string prefix = $"[{DateTime.Now:hh:mm:ss.fff}][{className,-25}][{method,-10}][{line,3}] ";
+            string prefix = $"[{className,-25}]";
             return prefix;
         }
 
